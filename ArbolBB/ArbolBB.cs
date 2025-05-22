@@ -130,5 +130,41 @@ namespace ArbolBusBin{
             }
             return ContarHojasNod(n.Izq) + ContarHojasNod(n.Der);
         }
+
+        public List<int> Recorrido()
+        {
+            List<int> lista = new List<int>();
+            RecorridoNod(Raiz, lista);
+            return lista;
+        }
+
+        public void RecorridoNod(Nodo n, List<int> lista)
+        {
+            if (n != null)
+            {
+
+                RecorridoNod(n.Izq, lista);
+                lista.Add(n.Dato);
+                RecorridoNod(n.Der, lista);
+            }
+        }
+        public bool Consecutivo(List<int> lista)
+        {
+            for(int i = 1; i < lista.Count; i++)
+            {
+                if(lista[i] - lista[i - 1] != 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool VerifConsecutivo()
+        {
+            List<int> lista = Recorrido();
+
+            return Consecutivo(lista);
+        }
     }
 }
